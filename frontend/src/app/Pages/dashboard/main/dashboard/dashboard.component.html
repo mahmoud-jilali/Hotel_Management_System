@@ -1,0 +1,50 @@
+<div class="min-h-screen bg-gray-100">
+    <div class="flex">
+        <app-sidenav />
+        <div class="flex-1 lg:ml-64">
+            <app-navbar />
+            <main class="p-6 mt-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  <div routerLink="/roomtypes" class="bg-blue-200 rounded-lg shadow hover:bg-blue-300 p-6 cursor-pointer">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-gray-900 text-xl">Room Types Total</h3>
+                      <i class="fas fa-calendar text-blue-500"></i>
+                    </div>
+                    <p class="text-2xl font-bold my-4">{{ count }}</p>
+                    <p routerLink="/roomtypes" class="flex text-1xl my4 text-blue-600 hover:text-blue-800 cursor-pointer">
+                      Details<span><fa-icon [icon]="faArrowRight" class="mx-2"></fa-icon></span></p>
+                  </div>
+                  <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-gray-500">Available Rooms</h3>
+                      <i class="fas fa-door-open text-green-500"></i>
+                    </div>
+                    <p class="text-2xl font-bold mt-2">18</p>
+                    <p class="text-sm text-red-500 mt-2">-3% from last month</p>
+                  </div>
+        
+                  <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-gray-500">Total Revenue</h3>
+                      <i class="fas fa-dollar-sign text-yellow-500"></i>
+                    </div>
+                    <p class="text-2xl font-bold mt-2">$12,456</p>
+                    <p class="text-sm text-green-500 mt-2">+8% from last month</p>
+                  </div>
+        
+                  <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-gray-500">Active Guests</h3>
+                      <i class="fas fa-users text-purple-500"></i>
+                    </div>
+                    <p class="text-2xl font-bold mt-2">86</p>
+                    <p class="text-sm text-green-500 mt-2">+5% from last month</p>
+                  </div>
+                </div>
+                <div class="mt-6">
+                  <router-outlet></router-outlet>
+                </div>
+              </main>
+        </div>
+    </div>
+</div>

@@ -286,3 +286,4 @@ D:\Dev_Projects\Hotel_Management_System\API\obj\Debug\net9.0\refint\API.dll
 D:\Dev_Projects\Hotel_Management_System\API\obj\Debug\net9.0\API.pdb
 D:\Dev_Projects\Hotel_Management_System\API\obj\Debug\net9.0\API.genruntimeconfig.cache
 D:\Dev_Projects\Hotel_Management_System\API\obj\Debug\net9.0\ref\API.dll
+D:\Dev_Projects\Hotel_Management_System\API\obj\Debug\net9.0\API.sourcelink.json

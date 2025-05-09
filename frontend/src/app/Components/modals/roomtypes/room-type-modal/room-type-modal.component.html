@@ -1,0 +1,86 @@
+<div *ngIf="isOpen" class="absolute top-40 left-0 right-0 z-50 flex items-center justify-center">
+    <div class="relative z-50 mx-auto p-5 border w-1/2 shadow-lg rounded-md bg-gray-100" 
+         (click)="$event.stopPropagation()">
+        <div class="text-center">
+            <div class="flex justify-between">
+                <h3 class="text-2xl my-2 mx-auto uppercase font-medium text-blue-700">Room type details</h3>
+                <fa-icon [icon]="faXmark" class="mx-2 cursor-pointer text-red-500 hover:text-red-600" (click)="closeModal.emit()"></fa-icon>
+            </div>
+            <div class="my-2">
+                <div class="space-y-4">
+                    <div class="bg-gray-100 rounded-lg flex justify-between">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-medium text-gray-900">Name</h4>
+                            <p class="text-sm text-gray-900">{{roomTypeDetails?.name}}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-medium text-gray-900">Description</h4>
+                            <p class="text-sm text-gray-900">{{roomTypeDetails?.description}}</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-medium text-gray-900">Created At</h4>
+                            <p class="text-sm text-gray-900">{{roomTypeDetails?.createdAt | date: 'dd/MM/yyyy'}}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-medium text-gray-900">Updated At</h4>
+                            <p class="text-sm text-gray-900">{{roomTypeDetails?.updatedAt | date: 'dd/MM/yyyy'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 class="text-lg font-medium mx-auto text-gray-900">Rooms</h4>
+            <div *ngIf="!roomTypeDetails?.rooms.length" class="mx-auto my-4">
+                <p class="text-red-500 mx-auto">No rooms available for this room type.</p>
+            </div>
+            <div class="relative overflow-x-auto my-2" *ngIf="roomTypeDetails?.rooms?.length">
+                <table class="w-full text-sm text-center rtl:text-right text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Id
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Price
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Description
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Created At
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Updated At
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(room of roomTypeDetails.rooms; track room.id){
+                        <tr class="bg-gray-100 border-b border-gray-200">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ room.id }}
+                            </th>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ room.price }}
+                            </td><td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ room.description }}
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ room.createdAt | date: 'dd/MM/yyyy' }}
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ room.updatedAt | date: 'dd/MM/yyyy' }}
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="max-w-sm mx-auto">
+                <button class="text-white bg-gray-500 hover:bg-gray-700 font-medium rounded-lg 
+                text-sm w-full sm:w-auto px-5 py-2.5 text-center cursor-pointer" (click)="closeModal.emit()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,6 +14,14 @@ public static class RoomTypesMapper
             Id = roomType.Id,
             Name = roomType.Name,
             Description = roomType.Description,
+            Rooms = roomType.Rooms.Select(r => new RoomDto
+            {
+                Id = r.Id,
+                Price = r.Price,
+                Description = r.Description,
+                CreatedAt = r.CreatedAt,
+                UpdatedAt = r.UpdatedAt
+            }).ToList(),
             CreatedAt = roomType.CreatedAt,
             UpdatedAt = roomType.UpdatedAt
         };

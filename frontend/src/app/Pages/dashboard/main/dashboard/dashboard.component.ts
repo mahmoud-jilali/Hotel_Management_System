@@ -5,6 +5,7 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 import { RoomtypesService } from '../../../../services/roomtypes/roomtypes.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { RoomsService } from '../../../../services/rooms/rooms.services';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,17 +17,34 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 export class DashboardComponent implements OnInit {
 
   faArrowRight = faArrowRight
-  count!: number
+  countRoomTypes!: number
+  countRooms!: number
+  countAvailableRooms!: number
 
   roomTypesService = inject(RoomtypesService)
+  roomsService = inject(RoomsService)
 
   ngOnInit(): void {
     this.roomTypesCount()
+    this.roomsCount()
+    this.availableRoomsCount()
   }
 
   roomTypesCount() {
     this.roomTypesService.countRoomTypes().subscribe((res: any) => {
-      this.count = res.count;
+      this.countRoomTypes = res.count;
+    });
+  }
+
+  roomsCount() {
+    this.roomsService.countRooms().subscribe((res: any) => {
+      this.countRooms = res.count;
+    });
+  }
+
+  availableRoomsCount() {
+    this.roomsService.countAvailableRooms().subscribe((res: any) => {
+      this.countAvailableRooms = res.count;
     });
   }
 }

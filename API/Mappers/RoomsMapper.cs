@@ -3,6 +3,7 @@ using API.DTOs.Booking;
 using API.DTOs.Room;
 using API.Models;
 using API.DTOs.RoomType;
+using API.Data;
 
 namespace API.Mappers;
 
@@ -39,26 +40,35 @@ public static class RoomsMapper
             UpdatedAt = room.UpdatedAt
         };
     }
-    public static Room ToCreateRoomDto(this CreateRoomDto creatrRoomDto)
+    public static Room ToCreateRoomDto(this CreateRoomDto createRoomDto, DBcontext context)
     {
+        var roomType = context.RoomTypes.FirstOrDefault(rt => rt.Name == createRoomDto.RoomTypeName);
+        if (roomType == null)
+        {
+            throw new ArgumentException($"Room type '{createRoomDto.RoomTypeName}' not found");
+        }
+
         return new Room
         {
-            RoomTypeId = creatrRoomDto.RoomTypeId,
-            Price = creatrRoomDto.Price,
-            Description = creatrRoomDto.Description,
-            CreatedAt = creatrRoomDto.CreatedAt,
-            UpdatedAt = creatrRoomDto.UpdatedAt
+            RoomTypeId = roomType.Id,
+            Price = createRoomDto.Price,
+            Description = createRoomDto.Description,
+            CreatedAt = createRoomDto.CreatedAt,
+            UpdatedAt = createRoomDto.UpdatedAt
         };
     }
-    public static Room ToUpdateRoomDto(this UpdateRoomDto updateRoomDto)
+    public static void ToUpdateRoomDto(this Room room, UpdateRoomDto updateRoomDto, DBcontext context)
     {
-        return new Room
+        var roomType = context.RoomTypes.FirstOrDefault(rt => rt.Name == updateRoomDto.RoomTypeName);
+        if (roomType == null)
         {
-            RoomTypeId = updateRoomDto.RoomTypeId,
-            Price = updateRoomDto.Price,
-            Description = updateRoomDto.Description,
-            CreatedAt = updateRoomDto.CreatedAt,
-            UpdatedAt = updateRoomDto.UpdatedAt
-        };
+            throw new ArgumentException($"Room type '{updateRoomDto.RoomTypeName}' not found");
+        }
+
+        room.RoomTypeId = roomType.Id;
+        room.Price = updateRoomDto.Price;
+        room.Description = updateRoomDto.Description;
+        room.CreatedAt = updateRoomDto.CreatedAt;
+        room.UpdatedAt = updateRoomDto.UpdatedAt;
     }
 }

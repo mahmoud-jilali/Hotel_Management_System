@@ -30,13 +30,11 @@ export class UpdateRoomTypesModalComponent implements OnChanges {
       }
     }
 
-    onUpdate() {
-      const id = this.updateRoomType.id;
-      this.roomTypesService.updateRoomType(id, this.updateRoomType).subscribe((res: any) => {
-        this.roomTypeUpdated.emit(res);
-        this.closeModal.emit();
-      }, (error) => {
-        console.error('Error updating room type:', error);
-      });
-    }
+  onUpdate() {
+    const id = this.updateRoomType.id;
+    this.roomTypesService.updateRoomType(id, this.updateRoomType).subscribe((res: any) => {
+      this.roomTypeUpdated.emit(res);
+      this.closeModal.emit();
+    });
+  }
 }

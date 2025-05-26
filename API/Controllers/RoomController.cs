@@ -40,33 +40,38 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRoom([FromBody] CreateRoomDto roomDto)
         {
-            var creatRoom = roomDto.ToCreateRoomDto();
-            await _context.Rooms.AddAsync(creatRoom);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var createRoom = roomDto.ToCreateRoomDto(_context);
+                await _context.Rooms.AddAsync(createRoom);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetRoom), new { id = creatRoom.Id }, creatRoom.ToRoomDto());
+                return CreatedAtAction(nameof(GetRoom), new { id = createRoom.Id }, createRoom.ToRoomDto());
+            } catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateRoom(int id, [FromBody] UpdateRoomDto updateRoom)
         {
-            // if (roomType == null || roomType.Id != id)
-            // {
-            //     return BadRequest("Room type ID mismatch.");
-            // }
-
             var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == id);
             if (room == null)
             {
                 return NotFound();
             }
 
-            room.Price = updateRoom.Price;
-            room.Description = updateRoom.Description;
-
-            await _context.SaveChangesAsync();
-
-            return Ok(room.ToRoomDto());
+            try
+            {
+                room.ToUpdateRoomDto(updateRoom, _context);
+                await _context.SaveChangesAsync();
+                return Ok(room.ToRoomDto());
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]

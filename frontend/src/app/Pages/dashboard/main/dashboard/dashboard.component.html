@@ -8,21 +8,27 @@
                   <div routerLink="/roomtypes" class="bg-blue-200 rounded-lg shadow hover:bg-blue-300 p-6 cursor-pointer">
                     <div class="flex items-center justify-between">
                       <h3 class="text-gray-900 text-xl">Room Types Total</h3>
-                      <i class="fas fa-calendar text-blue-500"></i>
                     </div>
-                    <p class="text-2xl font-bold my-4">{{ count }}</p>
+                    <p class="text-2xl font-bold my-4">{{ countRoomTypes }}</p>
                     <p routerLink="/roomtypes" class="flex text-1xl my4 text-blue-600 hover:text-blue-800 cursor-pointer">
                       Details<span><fa-icon [icon]="faArrowRight" class="mx-2"></fa-icon></span></p>
                   </div>
-                  <div class="bg-white rounded-lg shadow p-6">
+                  <div routerLink="/rooms" class="bg-gray-200 rounded-lg shadow p-6 hover:bg-gray-300 cursor-pointer">
                     <div class="flex items-center justify-between">
-                      <h3 class="text-gray-500">Available Rooms</h3>
-                      <i class="fas fa-door-open text-green-500"></i>
+                      <h3 class="text-gray-900 text-xl">Rooms Total</h3>
                     </div>
-                    <p class="text-2xl font-bold mt-2">18</p>
-                    <p class="text-sm text-red-500 mt-2">-3% from last month</p>
+                    <p class="text-2xl font-bold my-4">{{ countRooms }}</p>
+                    <p routerLink="/rooms" class="flex text-1xl my4 text-blue-600 hover:text-blue-800 cursor-pointer">
+                      Details<span><fa-icon [icon]="faArrowRight" class="mx-2"></fa-icon></span></p>
                   </div>
-        
+                  <div routerLink="/rooms" class="bg-green-300 rounded-lg shadow p-6 hover:bg-green-400 cursor-pointer">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-gray-900 text-xl">Available Rooms</h3>
+                    </div>
+                    <p class="text-2xl font-bold my-4">{{ countAvailableRooms }}</p>
+                    <p routerLink="/rooms" class="flex text-1xl my4 text-blue-600 hover:text-blue-800 cursor-pointer">
+                      Details<span><fa-icon [icon]="faArrowRight" class="mx-2"></fa-icon></span></p>
+                  </div>
                   <div class="bg-white rounded-lg shadow p-6">
                     <div class="flex items-center justify-between">
                       <h3 class="text-gray-500">Total Revenue</h3>
@@ -31,7 +37,6 @@
                     <p class="text-2xl font-bold mt-2">$12,456</p>
                     <p class="text-sm text-green-500 mt-2">+8% from last month</p>
                   </div>
-        
                   <div class="bg-white rounded-lg shadow p-6">
                     <div class="flex items-center justify-between">
                       <h3 class="text-gray-500">Active Guests</h3>

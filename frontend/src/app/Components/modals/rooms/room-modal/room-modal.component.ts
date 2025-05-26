@@ -4,14 +4,14 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-room-type-modal',
+  selector: 'app-room-modal',
   imports: [CommonModule, FontAwesomeModule],
-  templateUrl: './room-type-modal.component.html',
-  styleUrl: './room-type-modal.component.css'
+  templateUrl: './room-modal.component.html',
+  styleUrl: './room-modal.component.css'
 })
-export class RoomTypeModalComponent {
+export class RoomModalComponent {
   @Input() isOpen: boolean = false;
-  @Input() roomTypeDetails: any;
+  @Input() roomDetails: any;
   @Output() closeModal = new EventEmitter<void>();
 
   faXmark = faXmark;

@@ -3,36 +3,40 @@
          (click)="$event.stopPropagation()">
         <div class="text-center">
             <div class="flex justify-between">
-                <h3 class="text-2xl my-2 mx-auto uppercase font-medium text-blue-700">Room type details</h3>
+                <h3 class="text-2xl my-2 mx-auto uppercase font-medium text-blue-700">Room details</h3>
                 <fa-icon [icon]="faXmark" class="mx-2 cursor-pointer text-red-500 hover:text-red-600" (click)="closeModal.emit()"></fa-icon>
             </div>
             <div class="my-2">
                 <div class="space-y-4">
                     <div class="bg-gray-100 rounded-lg flex justify-between">
                         <div class="mb-4">
-                            <h4 class="text-lg font-medium text-gray-900">Name</h4>
-                            <p class="text-sm text-gray-900">{{roomTypeDetails?.name}}</p>
+                            <h4 class="text-lg font-medium text-gray-900">Room type</h4>
+                            <p class="text-sm text-gray-900">{{roomDetails?.roomType.name}}</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-medium text-gray-900">Price</h4>
+                            <p class="text-sm text-gray-900">{{roomDetails?.price}} MAD</p>
                         </div>
                         <div>
                             <h4 class="text-lg font-medium text-gray-900">Description</h4>
-                            <p class="text-sm text-gray-900">{{roomTypeDetails?.description}}</p>
+                            <p class="text-sm text-gray-900">{{roomDetails?.description}}</p>
                         </div>
                         <div class="mb-4">
                             <h4 class="text-lg font-medium text-gray-900">Created At</h4>
-                            <p class="text-sm text-gray-900">{{roomTypeDetails?.createdAt | date: 'dd/MM/yyyy'}}</p>
+                            <p class="text-sm text-gray-900">{{roomDetails?.createdAt | date: 'dd/MM/yyyy'}}</p>
                         </div>
                         <div>
                             <h4 class="text-lg font-medium text-gray-900">Updated At</h4>
-                            <p class="text-sm text-gray-900">{{roomTypeDetails?.updatedAt | date: 'dd/MM/yyyy'}}</p>
+                            <p class="text-sm text-gray-900">{{roomDetails?.updatedAt | date: 'dd/MM/yyyy'}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <h4 class="text-lg font-medium mx-auto text-gray-900">Rooms</h4>
-            <div *ngIf="!roomTypeDetails?.rooms.length" class="mx-auto my-4">
-                <p class="text-red-500 mx-auto">No rooms available for this room type.</p>
+            <h4 class="text-lg font-medium mx-auto text-gray-900">Bookings</h4>
+            <div *ngIf="!roomDetails?.bookings" class="mx-auto my-4">
+                <p class="text-red-500 mx-auto">No bookings available for this room.</p>
             </div>
-            <div class="relative overflow-x-auto my-2" *ngIf="roomTypeDetails?.rooms?.length">
+            <div class="relative overflow-x-auto my-2" *ngIf="roomDetails?.bookings">
                 <table class="w-full text-sm text-center rtl:text-right text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                         <tr>
@@ -40,10 +44,19 @@
                                 Id
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Price
+                                Start Date
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Description
+                                End Date
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Customer Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Customer Email
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Customer Phone
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Created At
@@ -54,24 +67,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for(room of roomTypeDetails.rooms; track room.id){
                         <tr class="bg-gray-100 border-b border-gray-200">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ room.id }}
+                                {{ roomDetails.bookings.id}}
                             </th>
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                {{ room.price }}
-                            </td><td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                {{ room.description }}
+                                {{ roomDetails.bookings.startDate | date: 'dd/MM/yyyy'}}
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                {{ room.createdAt | date: 'dd/MM/yyyy' }}
+                                {{ roomDetails.bookings.endDate | date: 'dd/MM/yyyy' }}
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                {{ room.updatedAt | date: 'dd/MM/yyyy' }}
+                                {{ roomDetails.bookings.customerName }}
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ roomDetails.bookings.customerEmail }}
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ roomDetails.bookings.customerPhone }}
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ roomDetails.bookings.createdAt | date: 'dd/MM/yyyy' }}
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ roomDetails.bookings.updatedAt | date: 'dd/MM/yyyy' }}
                             </td>
                         </tr>
-                        }
                     </tbody>
                 </table>
             </div>

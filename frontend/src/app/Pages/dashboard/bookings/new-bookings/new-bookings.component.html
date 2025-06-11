@@ -1,0 +1,75 @@
+<div *ngIf="newBookings.length === 0" class="mx-auto my-7 text-2xl text-center">
+    <p class="text-red-500 mx-auto">No new bookings available.</p>
+</div>
+<div class="relative overflow-x-auto my-10" *ngIf="newBookings && newBookings.length > 0">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Room ID
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Customer Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Customer Email
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Customer Phone
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Start Date
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    End Date
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Room Desciption
+                </th>
+                <!-- <th scope="col" class="px-6 py-3">
+                    Action
+                </th> -->
+            </tr>
+        </thead>
+        <tbody>
+            @for(booking of newBookings; track $index){
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ booking.roomId }}
+                </th>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    {{ booking.customerName }}
+                </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    {{ booking.customerEmail}}
+                </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    {{ booking.customerPhone}}
+                </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    {{ booking.startDate | date: 'dd/MM/yyyy' }}
+                </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    {{ booking.endDate | date: 'dd/MM/yyyy' }}
+                </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    {{ booking.room.description}}
+                </td>
+                <!-- <td class="px-6 py-4">
+                    <div class="flex items-center space-x-3">
+                        <button type="button" (click)="openDetailsModal(room)" class="font-medium text-gray-500 hover:text-gray-700 cursor-pointer">
+                            View
+                        </button>
+                        <button type="button" (click)="openUpdateModal(room)" class="font-medium text-green-600 hover:text-green-800 cursor-pointer">
+                            Edit
+                        </button>
+                        <button type="button" (click)="openDeleteModal(room)" class="font-medium text-red-600 dark:text-red-500 cursor-pointer">
+                            Delete
+                        </button>
+                    </div>
+                </td> -->
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

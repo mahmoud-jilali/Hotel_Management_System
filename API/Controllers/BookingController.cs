@@ -87,5 +87,38 @@ namespace API.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("old_bookings")]
+        public async Task<IActionResult> OldBookings()
+        {
+            var currentDate = DateTime.UtcNow;
+
+            var oldBookings = await _context.Bookings.Where(b => b.EndDate < currentDate)
+                .Include(r => r.Room).ToListAsync();
+
+            return Ok(oldBookings.Select(b => b.ToBookingDto()));
+        }
+
+        [HttpGet("current_bookings")]
+        public async Task<IActionResult> CurrentBookings()
+        {
+            var currentDate = DateTime.UtcNow;
+
+            var currentBookings = await _context.Bookings.Where(b => b.StartDate <= currentDate && b.EndDate > currentDate)
+                .Include(r => r.Room).ToListAsync();
+
+            return Ok(currentBookings.Select(b => b.ToBookingDto()));
+        }
+        
+        [HttpGet("new_bookings")]
+        public async Task<IActionResult> NewBookings()
+        {
+            var currentDate = DateTime.UtcNow;
+
+            var newBookings = await _context.Bookings.Where(b => b.StartDate >= currentDate && b.EndDate > currentDate)
+                .Include(r => r.Room).ToListAsync();
+            
+            return Ok(newBookings.Select(b => b.ToBookingDto()));
+        }
     }
 }

@@ -33,7 +33,7 @@ export class RoomsComponent implements OnInit {
   }
 
   getRooms(){
-    this.roomsService.getRooms().subscribe((res:any) =>{
+    this.roomsService.getRooms().subscribe((res:any) => {
       this.rooms = res;
     })
   }

@@ -4,9 +4,29 @@
         <div class="flex-1 lg:ml-64">
             <app-navbar />
             <main class="p-6 mt-16">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <h1>Bookings</h1>
+                <div class="flex justify-between md:grid-cols-2 lg:grid-cols-4 gap-6 my-5">
+                    <h1 class="mx-7 text-4xl text-blue-500">Bookings</h1>
+                    <button type="button" (click)="openCreateModal()" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 
+                    hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 cursor-pointer flex">
+                    <fa-icon [icon]="faPlus" class="mx-2"></fa-icon><span class="mx-2">Add</span></button>
                 </div>
+                <div class="hidden w-auto md:block md:w-auto">
+                    <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
+                        <li>
+                            <a routerLink="/bookings/all" class="block py-2 px-3 text-lg text-gray-900 hover:border-b-2 md:text-blue-700 md:p-0">All</a>
+                        </li>
+                        <li>
+                            <a routerLink="/bookings/old" class="block py-2 px-3 text-lg text-gray-900 hover:border-b-2 md:border-0 md:hover:text-blue-700 md:p-0">Old</a>
+                        </li>
+                        <li>
+                            <a routerLink="/bookings/current" class="block py-2 px-3 text-lg text-gray-900 hover:border-b-2 md:border-0 md:hover:text-blue-700 md:p-0">Current</a>
+                        </li>
+                        <li>
+                            <a routerLink="/bookings/new" class="block py-2 px-3 text-lg text-gray-900 hover:border-b-2 md:border-0 md:hover:text-blue-700 md:p-0">New</a>
+                        </li>
+                    </ul>
+                </div>
+                <router-outlet></router-outlet>
             </main>
         </div>
     </div>

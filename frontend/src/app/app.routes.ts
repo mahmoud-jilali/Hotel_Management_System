@@ -5,6 +5,10 @@ import { DashboardComponent } from './Pages/dashboard/main/dashboard/dashboard.c
 import { RoomsComponent } from './Pages/dashboard/rooms/rooms/rooms.component';
 import { BookingsComponent } from './Pages/dashboard/bookings/bookings.component';
 import { RoomtypesComponent } from './Pages/dashboard/roomtypes/roomtypes.component';
+import { OldBookingsComponent } from './Pages/dashboard/bookings/old-bookings/old-bookings.component';
+import { CurrentBookingsComponent } from './Pages/dashboard/bookings/current-bookings/current-bookings.component';
+import { NewBookingsComponent } from './Pages/dashboard/bookings/new-bookings/new-bookings.component';
+import { AllBookingsComponent } from './Pages/dashboard/bookings/all-bookings/all-bookings.component';
 
 export const routes: Routes = [
     {
@@ -34,6 +38,24 @@ export const routes: Routes = [
             {
                 path: 'bookings',
                 component: BookingsComponent,
+                children: [
+                    {
+                        path: 'all',
+                        component: AllBookingsComponent
+                    },
+                    {
+                        path: 'old',
+                        component: OldBookingsComponent,
+                    },
+                    {
+                        path: 'current',
+                        component: CurrentBookingsComponent,
+                    },
+                    {
+                        path: 'new',
+                        component: NewBookingsComponent,
+                    }
+                ]
             },
             {
                 path: 'roomtypes',

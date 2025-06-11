@@ -5,6 +5,7 @@ using API.Models;
 using API.Mappers;
 using API.DTOs.Room;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -15,6 +16,7 @@ namespace API.Controllers
         private readonly DBcontext _context = context;
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetRooms()
         {
             var rooms = await _context.Rooms.Include(b => b.Bookings)
@@ -103,7 +105,7 @@ namespace API.Controllers
             
             var countAvailableRooms = await _context.Rooms
                 .Where(r => !r.Bookings.Any(b => 
-                    (currentDate >= b.StartDate && currentDate <= b.EndDate)))
+                    currentDate >= b.StartDate && currentDate < b.EndDate))
                 .CountAsync();
             
             return Ok(new { count = countAvailableRooms });
